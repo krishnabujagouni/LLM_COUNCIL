@@ -1,0 +1,23 @@
+[project]
+name = "llm_council"
+version = "0.1.0"
+description = "LLM_COUNCIL using crewAI"
+authors = [{ name = "Your Name", email = "you@example.com" }]
+requires-python = ">=3.10,<3.14"
+dependencies = [
+    "crewai[tools]>=0.177.0,<1.0.0"
+]
+
+[project.scripts]
+llm_council = "llm_council.main:run"
+run_crew = "llm_council.main:run"
+train = "llm_council.main:train"
+replay = "llm_council.main:replay"
+test = "llm_council.main:test"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.crewai]
+type = "crew"
