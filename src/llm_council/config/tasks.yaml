@@ -1,36 +1,5 @@
 # gather_answers:
 #   description: >
-#     STEP 1: You will receive the user's question.
-#     STEP 2: Provide your independent answer WITHOUT seeing other model outputs.
-#   expected_output: >
-#     A detailed answer to the user's question.
-#   # agent: "{{agent}}"  
-#   # Allows GPT, Claude, Gemini to all run this task
-
-# critique_answers:
-#   description: >
-#     Compare and critique all delegate answers.
-#     For each answer:
-#     - Identify strengths
-#     - Identify weaknesses
-#     - Identify hallucinations or missing context
-#     - Provide improvements
-#   expected_output: >
-#     A structured critique comparing all delegate answers.
-#   # agent: "{{agent}}"  
-#   # ALL THREE delegates critique each other (correct behavior)
-
-# final_answer:
-#   description: >
-#     Using all delegate answers + all critiques,
-#     synthesize the best possible final answer.
-#   expected_output: >
-#     A refined, deeply reasoned final answer for the user.
-#   # agent: chairman
-
-
-# gather_answers:
-#   description: >
 #     Answer the following question: {question}
     
 #     Provide your independent answer WITHOUT seeing other model outputs.
@@ -42,81 +11,87 @@
 #   description: >
 #     The user asked: {question}
     
-#     Compare and critique all delegate answers.
-#     For each answer:
-#     - Identify strengths
-#     - Identify weaknesses
-#     - Identify hallucinations or missing context
-#     - Provide improvements
+#     You have received the answers from three AI models (GPT, Claude, and Gemini).
+    
+#     TASK: Carefully review ALL THREE answers from the context above, then:
+    
+#     1. **For GPT's answer:**
+#        - Identify strengths
+#        - Identify weaknesses
+#        - Identify any hallucinations or missing context
+#        - Suggest specific improvements
+    
+#     2. **For Claude's answer:**
+#        - Identify strengths
+#        - Identify weaknesses
+#        - Identify any hallucinations or missing context
+#        - Suggest specific improvements
+    
+#     3. **For Gemini's answer:**
+#        - Identify strengths
+#        - Identify weaknesses
+#        - Identify any hallucinations or missing context
+#        - Suggest specific improvements
+    
+#     4. **Comparative Analysis:**
+#        - Which answer is most accurate?
+#        - Which answer is most comprehensive?
+#        - Which answer is most accessible?
+#        - What's the best approach from combining all three?
 #   expected_output: >
-#     A structured critique comparing all delegate answers.
+#     A detailed comparative critique of all three delegate answers with specific examples.
 
 # final_answer:
 #   description: >
 #     The user's original question was: {question}
     
-#     Using all delegate answers + all critiques,
-#     synthesize the best possible final answer.
+#     You have received:
+#     1. Three independent answers from GPT, Claude, and Gemini
+#     2. Three detailed critiques analyzing all answers
+    
+#     TASK: Synthesize the BEST POSSIBLE final answer by:
+#     - Taking the strongest points from each model's answer
+#     - Avoiding the weaknesses identified in the critiques
+#     - Ensuring accuracy and completeness
+#     - Making it clear and accessible
+    
+#     Your final answer should be better than any individual response.
 #   expected_output: >
-#     A refined, deeply reasoned final answer for the user.
+#     A refined, comprehensive final answer that represents the best synthesis of all inputs.
 
 gather_answers:
   description: >
-    Answer the following question: {question}
+    Question: {question}
     
-    Provide your independent answer WITHOUT seeing other model outputs.
-    Give a detailed, comprehensive response.
+    Answer in MAXIMUM 4 sentences. Be direct and factual.
+    NO introductions, NO conclusions, NO filler phrases.
   expected_output: >
-    A detailed answer to the user's question.
+    Concise 4-sentence answer with key facts only.
 
 critique_answers:
   description: >
-    The user asked: {question}
+    Question: {question}
     
-    You have received the answers from three AI models (GPT, Claude, and Gemini).
+    Review the OTHER models' answers (not your own).
     
-    TASK: Carefully review ALL THREE answers from the context above, then:
+    FORMAT YOUR RESPONSE EXACTLY AS:
+    "STRENGTH: [one sentence]
+    WEAKNESS: [one sentence]
+    MISSING: [one sentence]"
     
-    1. **For GPT's answer:**
-       - Identify strengths
-       - Identify weaknesses
-       - Identify any hallucinations or missing context
-       - Suggest specific improvements
-    
-    2. **For Claude's answer:**
-       - Identify strengths
-       - Identify weaknesses
-       - Identify any hallucinations or missing context
-       - Suggest specific improvements
-    
-    3. **For Gemini's answer:**
-       - Identify strengths
-       - Identify weaknesses
-       - Identify any hallucinations or missing context
-       - Suggest specific improvements
-    
-    4. **Comparative Analysis:**
-       - Which answer is most accurate?
-       - Which answer is most comprehensive?
-       - Which answer is most accessible?
-       - What's the best approach from combining all three?
+    DO NOT provide a full answer. DO NOT explain. ONLY provide the 3 labeled sentences above.
   expected_output: >
-    A detailed comparative critique of all three delegate answers with specific examples.
+    Three labeled sentences: STRENGTH, WEAKNESS, MISSING.
 
 final_answer:
   description: >
-    The user's original question was: {question}
+    Question: {question}
     
-    You have received:
-    1. Three independent answers from GPT, Claude, and Gemini
-    2. Three detailed critiques analyzing all answers
+    Synthesize the best answer using:
+    - Common facts all models agreed on
+    - Unique insights from critiques
+    - Fill gaps identified
     
-    TASK: Synthesize the BEST POSSIBLE final answer by:
-    - Taking the strongest points from each model's answer
-    - Avoiding the weaknesses identified in the critiques
-    - Ensuring accuracy and completeness
-    - Making it clear and accessible
-    
-    Your final answer should be better than any individual response.
+    MAXIMUM 6 sentences. Start directly with the answer.
   expected_output: >
-    A refined, comprehensive final answer that represents the best synthesis of all inputs.
+    Final answer in 6 sentences or less. No preamble.
